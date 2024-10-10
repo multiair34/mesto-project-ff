@@ -20,7 +20,7 @@ function cardAdd(title, link) {
         cardDelete(cardItem);
     });
     return cardItem;
-}
+};
 
 // @todo: Функция удаления карточки
 
@@ -38,3 +38,26 @@ initialCards.forEach(function(object) {
     cardCreate(cardsList, cardAdd(object.name, object.link))
 });
 
+import './index.css';
+
+
+
+
+
+
+export const popupProfile = document.querySelector('.popup_type_edit');
+export const popupNewCard = document.querySelector('.popup_type_new-card');
+export const popupImg = document.querySelector('.popup_type_image');
+export const popupRemove = document.querySelector('.popup__close');
+export const popup = document.querySelector('.popup');
+
+function openPopup (popup) {
+    const popupOpenBut = document.querySelector('.profile__edit-button');
+
+    popupOpenBut.addEventListener('click', function(evt) {
+        if(evt.currentTarget.classList.contains('profile__edit-button')) {
+
+            popup.add('visibility', visible);
+        };
+    })
+}
