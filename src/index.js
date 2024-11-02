@@ -1,3 +1,5 @@
+import {initialCards} from './cards.js'
+
 // @todo: Темплейт карточки
 
 const cardTemplate = document.querySelector('#card-template').content;
@@ -40,24 +42,45 @@ initialCards.forEach(function(object) {
 
 import './index.css';
 
+const popup = document.querySelector('.popup');
+const profileEdit = document.querySelector('.profile__edit-button');
+const popupClosed = document.querySelector('.popup__close');
+const button = document.querySelector('.button');
+const popupEdit = document.querySelector('.popup_type_edit');
+const inputName = document.querySelector('.popup__input_type_name');
+const inputDescription = document.querySelector('.popup__input_type_description');
+const profileTitle = document.querySelector('.profile__title');
+const profileDescription = document.querySelector('.profile__description');
+
+
+const editForm = document.querySelector('.popup__form[name="edit-profile]');
 
 
 
 
 
-export const popupProfile = document.querySelector('.popup_type_edit');
-export const popupNewCard = document.querySelector('.popup_type_new-card');
-export const popupImg = document.querySelector('.popup_type_image');
-export const popupRemove = document.querySelector('.popup__close');
-export const popup = document.querySelector('.popup');
 
-function openPopup (popup) {
-    const popupOpenBut = document.querySelector('.profile__edit-button');
-
-    popupOpenBut.addEventListener('click', function(evt) {
-        if(evt.currentTarget.classList.contains('profile__edit-button')) {
-
-            popup.add('visibility', visible);
-        };
-    })
+function popupOpen(popup) {
+    popup.classList.add('popup_is-opened');
 }
+function popupClose(popup) {
+    popup.classList.remove('popup_is-opened');
+}
+
+
+
+profileEdit.addEventListener('click', function(e) {
+    popupOpen(popupEdit);
+    inputName.value = profileTitle.textContent;
+    inputDescription.value = profileDescription.textContent;
+})
+
+popupClosed.addEventListener('click', function(e) {
+    popupClose(popupClosed.closest('.popup_is-opened'))
+})
+
+document.addEventListener('keydown', function(evt) {
+    if (evt.code === "Escape" && popup.classList.contains('popup_is-opened')) {
+        popupClose(popup);
+    }
+})
