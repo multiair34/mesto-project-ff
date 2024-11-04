@@ -42,9 +42,9 @@ initialCards.forEach(function(object) {
 
 import './index.css';
 
-const popup = document.querySelector('.popup');
+const popup = document.querySelectorAll('.popup');
 const profileEdit = document.querySelector('.profile__edit-button');
-const popupClosed = document.querySelectorAll('.popup__close');
+const closePopupButtons = document.querySelectorAll('.popup__close');
 const button = document.querySelector('.button');
 const popupEdit = document.querySelector('.popup_type_edit');
 const inputName = document.querySelector('.popup__input_type_name');
@@ -58,7 +58,7 @@ const editForm = document.querySelector('.popup__form[name="edit-profile"]');
 
 
 
-
+// открытие попапа
 
 function popupOpen(popup) {
     popup.classList.add('popup_is-opened');
@@ -67,11 +67,14 @@ function popupClose(popup) {
     popup.classList.remove('popup_is-opened');
 };
 
+// закрытие попапа
 
 addButton.addEventListener('click', function() {
     popupOpen(addCard);
 });
 
+
+// заполненные поля формы Имя и О себе
 
 profileEdit.addEventListener('click', function(e) {
     popupOpen(popupEdit);
@@ -79,18 +82,38 @@ profileEdit.addEventListener('click', function(e) {
     inputDescription.value = profileDescription.textContent;
 });
 
+function handleFormSubmit(e) {
+    e.preventDefault();
+    profileTitle.textContent = inputName.value;
+    profileDescription.textContent = inputDescription.value;
+}
 
-popupClosed.forEach(button => {
+popupEdit.addEventListener('submit', handleFormSubmit);
+
+
+// Закрытие по кнопке
+
+closePopupButtons.forEach(button => {
     button.addEventListener('click', function() {
         const popup = button.closest('.popup');
         popupClose(popup);
     });
 });
 
+// Закрытие по фону
+
+popup.forEach(popup => {
+   popup.addEventListener('click', function(e) {
+    popupClose(e.target);
+   })
+})
+
+// закрытие по ESC
+
 document.addEventListener('keydown', function(e) {
     if (e.code === "Escape") {
-        const openPopups = document.querySelectorAll('.popup_is-opened');
-        openPopups.forEach(popup => {
+        const popupOpened = document.querySelectorAll('.popup_is-opened');
+        popupOpened.forEach(popup => {
             popupClose(popup);
         });
     }
