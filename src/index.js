@@ -33,7 +33,7 @@ function cardDelete(cardItem) {
 // @todo: Вывести карточки на страницу
 
 function cardCreate(container, cardData) {
-    container.append(cardData);
+    container.prepend(cardData);
 };
 
 initialCards.forEach(function(object) {
@@ -52,27 +52,67 @@ const inputDescription = document.querySelector('.popup__input_type_description'
 const profileTitle = document.querySelector('.profile__title');
 const profileDescription = document.querySelector('.profile__description');
 const addCard = document.querySelector('.popup_type_new-card');
+const inputCardName = document.querySelector('.popup__input_type_card-name');
+const inputCardUrl = document.querySelector('.popup__input_type_url');
+const cardLikeBut = document.querySelectorAll('.card__like-button');
+const card = document.querySelector('.card');
 
 const editForm = document.querySelector('.popup__form[name="edit-profile"]');
-
-
-
 
 // открытие попапа
 
 function popupOpen(popup) {
     popup.classList.add('popup_is-opened');
 };
+
+// закрытие попапа
+
 function popupClose(popup) {
     popup.classList.remove('popup_is-opened');
 };
 
-// закрытие попапа
+// добавление карточки
 
 addButton.addEventListener('click', function() {
     popupOpen(addCard);
 });
 
+function newCard(e, cardsLike) {
+    e.preventDefault();
+    const cardNew = cardAdd(inputCardName.value, inputCardUrl.value);
+    cardCreate(cardsList, cardNew);
+    popupClose(addCard);
+    inputCardName.value = '';
+    inputCardUrl.value = '';
+};
+
+addCard.addEventListener('submit', newCard);
+
+// Лайк карточки
+
+function likeCard(card) {
+    card.classList.add('cardLiked');
+};
+
+function unLikeCard(card) {
+    card.classList.remove('cardLiked')
+};
+
+function cardsLike() {
+    cardLikeBut.forEach(cardLikeBut => {
+        cardLikeBut.addEventListener('click', function(e) {
+            if(cardLikeBut.classList.contains('cardLiked')){
+                unLikeCard(e.target);
+                cardLikeBut.style.background = "url('../../../images/like-inactive.svg')";
+            } else {
+                likeCard(e.target);
+                cardLikeBut.style.background = "url('../../../images/like-active.svg')";
+            };
+        });
+    })
+};
+
+cardsLike();
 
 // заполненные поля формы Имя и О себе
 
