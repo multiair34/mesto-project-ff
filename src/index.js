@@ -26,7 +26,7 @@ function createCardNode(title, link, likeHandler, imageOpen) {
         cardDelete(cardItem);
     });
     likeButton.addEventListener('click', likeHandler);
-    cardImage.addEventListener('click', imageOpen);
+    cardImage.addEventListener('click', () => imageOpen(title, link));
 
     return cardItem;
 };
@@ -55,7 +55,6 @@ initialCards.forEach(function(object) {
 const popup = document.querySelectorAll('.popup');
 const profileEdit = document.querySelector('.profile__edit-button');
 const closePopupButtons = document.querySelectorAll('.popup__close');
-const button = document.querySelector('.button');
 const popupEdit = document.querySelector('.popup_type_edit');
 const inputName = document.querySelector('.popup__input_type_name');
 const inputDescription = document.querySelector('.popup__input_type_description');
@@ -66,24 +65,15 @@ const inputCardName = document.querySelector('.popup__input_type_card-name');
 const inputCardUrl = document.querySelector('.popup__input_type_url');
 const popupImage = document.querySelector('.popup_type_image');
 const openImage = document.querySelector('.popup__image');
-const cardTitle = document.querySelectorAll('.card__title');
-const cardImage = document.querySelectorAll('.card__image');
 const popupTitle = document.querySelector('.popup__caption');
 
-function popupImageOpen(e) {
-    cardImage.forEach(cardImage => {
-        cardImage.addEventListener('click', function(e) {
-            openImage.src = cardImage.src;
-            popupTitle.textContent = cardTitle.textContent;
-            // cardTitle.forEach(cardTitle => {
-            //     popupTitle.textContent = cardTitle.textContent;
-            // });
-            
-            popupOpen(popupImage);
-        });
-    })
-}
+function popupImageOpen(title, link) {
+    openImage.src = link;
+    openImage.alt = title;
+    popupTitle.textContent = title;
 
+    popupOpen(popupImage);
+};
 // открытие попапа
 
 function popupOpen(popup) {
@@ -105,7 +95,7 @@ addButton.addEventListener('click', function() {
 addCard.addEventListener('submit', (e) => {
     e.preventDefault();
 
-    const card = createCardNode(inputCardName.value, inputCardUrl.value, likeButtonClicked);
+    const card = createCardNode(inputCardName.value, inputCardUrl.value, likeButtonClicked, popupImageOpen);
     appendCardToPage(cardsList, card);
     popupClose(addCard);
     inputCardName.value = '';
