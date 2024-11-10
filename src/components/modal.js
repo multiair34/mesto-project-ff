@@ -1,47 +1,23 @@
-import { cardsList,
-    addButton,
-    popup,
-    profileEdit,
-    closePopupButtons,
-    popupEdit,
-    inputName,
-    inputDescription,
-    profileTitle,
-    profileDescription,
-    addCard,
-    inputCardName,
-    inputCardUrl,
-    popupImage,
-    openImage,
-    popupTitle } from "..";
-
-export function handleFormSubmit(e) {
+export function handleProfileFormSubmit(e) {
     e.preventDefault();
     profileTitle.textContent = inputName.value;
     profileDescription.textContent = inputDescription.value;
+    closePopup(popupEdit);
 };
 
-export function popupOpen(popup) {
+export function openPopup(popup) {
     popup.classList.add('popup_is-opened');
 };
 
-export function popupClose(popup) {
+export function closePopup(popup) {
     popup.classList.remove('popup_is-opened');
-};
-
-export function popupImageOpen(title, link) {
-    openImage.src = link;
-    openImage.alt = title;
-    popupTitle.textContent = title;
-
-    popupOpen(popupImage);
 };
 
 export function closedPopup() {
     closePopupButtons.forEach(button => {
         button.addEventListener('click', function() {
             const popup = button.closest('.popup');
-            popupClose(popup);
+            closePopup(popup);
         });
     });
 };
@@ -49,17 +25,17 @@ export function closedPopup() {
 export function closedPopupOverlay () {
     popup.forEach(popup => {
         popup.addEventListener('click', function(e) {
-         popupClose(e.target);
+         closePopup(e.target);
         })
      })
 };
 
-export function closedPopupEscButton () {
+export function closePopupByEsc () {
     document.addEventListener('keydown', function(e) {
         if (e.code === "Escape") {
             const popupOpened = document.querySelectorAll('.popup_is-opened');
             popupOpened.forEach(popup => {
-                popupClose(popup);
+                closePopup(popup);
             });
         }
     });

@@ -1,4 +1,4 @@
-export function createCardNode(title, link, likeHandler, imageOpen) {
+export function createCardNode(title, link, likeHandler, openImage) {
     const cardTemplate = document.querySelector('#card-template').content;
     const cardItem = cardTemplate.querySelector('.places__item').cloneNode(true);
     const cardTitle = cardItem.querySelector('.card__title');
@@ -13,17 +13,13 @@ export function createCardNode(title, link, likeHandler, imageOpen) {
         cardDelete(cardItem);
     });
     likeButton.addEventListener('click', likeHandler);
-    cardImage.addEventListener('click', () => imageOpen(title, link));
+    cardImage.addEventListener('click', () => openImage(title, link));
 
     return cardItem;
 };
 
 export function cardDelete(cardItem) {
     cardItem.remove()
-};
-
-export function appendCardToPage(container, cardData) {
-    container.prepend(cardData);
 };
 
 export function likeButtonClicked(e) {
