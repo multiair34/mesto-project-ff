@@ -7,7 +7,6 @@ const cardsList = document.querySelector('.places__list');
 const addButton = document.querySelector('.profile__add-button');
 const popup = document.querySelectorAll('.popup');
 const profileEdit = document.querySelector('.profile__edit-button');
-
 const popupEdit = document.querySelector('.popup_type_edit');
 const inputName = document.querySelector('.popup__input_type_name');
 const inputDescription = document.querySelector('.popup__input_type_description');
@@ -21,7 +20,6 @@ const openImage = document.querySelector('.popup__image');
 const popupTitle = document.querySelector('.popup__caption');
 
 closedPopup();
-closePopupByEsc();
 closedPopupOverlay();
 
 addButton.addEventListener('click', function() {

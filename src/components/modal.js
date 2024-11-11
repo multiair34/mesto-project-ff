@@ -10,10 +10,12 @@ export function handleProfileFormSubmit(e) {
 
 export function openPopup(popup) {
     popup.classList.add('popup_is-opened');
+    document.addEventListener('keydown', closePopupByEsc);
 };
 
 export function closePopup(popup) {
     popup.classList.remove('popup_is-opened');
+    document.removeEventListener('keydown', closePopupByEsc)
 };
 
 export function closedPopup() {
@@ -33,13 +35,8 @@ export function closedPopupOverlay () {
      })
 };
 
-export function closePopupByEsc () {
-    document.addEventListener('keydown', function(e) {
-        if (e.key === "Escape") {
-            const popupOpened = document.querySelectorAll('.popup_is-opened');
-            popupOpened.forEach(popup => {
-                closePopup(popup);
-            });
-        }
-    });
+export function closePopupByEsc(e) {
+    if(e.key === 'Escape') {
+        closePopup(document.querySelector('.popup_is-opened'));
+    }
 }
