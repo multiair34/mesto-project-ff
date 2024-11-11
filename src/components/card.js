@@ -10,7 +10,7 @@ export function createCardNode(title, link, likeHandler, openImage) {
     cardImage.setAttribute('src', link);
     cardImage.setAttribute('alt', title);
     deleteButton.addEventListener('click', () => {
-        cardDelete(cardItem);
+        deleteCard(cardItem);
     });
     likeButton.addEventListener('click', likeHandler);
     cardImage.addEventListener('click', () => openImage(title, link));
@@ -18,7 +18,7 @@ export function createCardNode(title, link, likeHandler, openImage) {
     return cardItem;
 };
 
-export function cardDelete(cardItem) {
+export function deleteCard(cardItem) {
     cardItem.remove()
 };
 

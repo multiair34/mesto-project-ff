@@ -1,3 +1,6 @@
+const closePopupButtons = document.querySelectorAll('.popup__close');
+const popup = document.querySelectorAll('.popup');
+
 export function handleProfileFormSubmit(e) {
     e.preventDefault();
     profileTitle.textContent = inputName.value;
@@ -32,7 +35,7 @@ export function closedPopupOverlay () {
 
 export function closePopupByEsc () {
     document.addEventListener('keydown', function(e) {
-        if (e.code === "Escape") {
+        if (e.key === "Escape") {
             const popupOpened = document.querySelectorAll('.popup_is-opened');
             popupOpened.forEach(popup => {
                 closePopup(popup);
