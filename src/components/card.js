@@ -18,7 +18,7 @@ export function createCardNode(title, link, likeHandler, openImage) {
     return cardItem;
 };
 
-export function deleteCard(cardItem) {
+function deleteCard(cardItem) {
     cardItem.remove()
 };
 

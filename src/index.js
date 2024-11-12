@@ -1,5 +1,5 @@
 import { initialCards } from './cards.js'
-import { createCardNode, deleteCard, likeButtonClicked } from './components/card.js';
+import { createCardNode, likeButtonClicked } from './components/card.js';
 import { closePopup, openPopup } from './components/modal.js';
 import './index.css';
 
@@ -13,10 +13,25 @@ const profileTitle = document.querySelector('.profile__title');
 const profileDescription = document.querySelector('.profile__description');
 const popupNewCard = document.querySelector('.popup_type_new-card');
 const popupImage = document.querySelector('.popup_type_image');
+const closePopupButtons = document.querySelectorAll('.popup__close');
+const popup = document.querySelectorAll('.popup');
 
 addButton.addEventListener('click', function() {
     openPopup(popupNewCard);
 });
+
+closePopupButtons.forEach(button => {
+    button.addEventListener('click', function() {
+        const popup = button.closest('.popup');
+        closePopup(popup);
+    });
+});
+
+popup.forEach(popup => {
+    popup.addEventListener('click', function(e) {
+     closePopup(e.target);
+    })
+ })
 
 popupNewCard.addEventListener('submit', (e) => {
     const inputCardName = popupNewCard.querySelector('.popup__input_type_card-name');
