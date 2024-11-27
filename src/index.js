@@ -1,6 +1,7 @@
 import { initialCards } from './cards.js'
 import { createCardNode, likeButtonClicked } from './components/card.js';
 import { closePopup, openPopup } from './components/modal.js';
+import {  } from './validation.js';
 import './index.css';
 
 const cardsList = document.querySelector('.places__list');
@@ -80,3 +81,101 @@ function handleProfileFormSubmit(e) {
     profileDescription.textContent = inputDescription.value;
     closePopup(popupEdit);
 }
+
+enableValidation(config);
+
+
+
+// const setEventListener = (popupForm, config) => {
+//     const inputList = Array.from(popupForm.querySelectorAll(config.inputSelector));
+//     const submitButton = popupForm.querySelector(config.submitButtonSelector);
+
+
+//     toggleButtonState(inputList, submitButton, config);
+
+//     inputList.forEach((popupInput) => {
+        
+//         popupInput.addEventListener('input', () => {
+//             isValid(popupForm, popupInput, popupError, config);
+//             toggleButtonState(inputList, submitButton, config);
+//         });
+//     });
+
+// };
+
+// const toggleButtonState = (inputList, submitButton, config) => {
+//     const isFormValid = inputList.every((input) => input.validity.valid);
+
+//     if (isFormValid) {
+//         submitButton.classList.remove(config.inactiveButtonClass);
+//         submitButton.disabled = false;
+//     } else {
+//         submitButton.classList.add(config.inactiveButtonClass);
+//         submitButton.disabled = true;
+//     }
+// };
+
+// //сделать объект настроек
+
+// const config = {
+//     formSelector: '.popup__form',
+//     inputSelector: '.popup__input',
+//     submitButtonSelector: '.popup__button',
+//     inactiveButtonClass: 'popup__button_disabled',
+//     inputErrorClass: 'popup__input_type_error',
+//     errorClass: 'popup__error_visible'
+// }
+
+// const enableValidation = (config) => {
+//     const popupFormList = Array.from(document.querySelectorAll(config.formSelector));
+//     popupFormList.forEach((popupForm) => {
+//         setEventListener(popupForm, config);
+//     });
+// };
+
+// enableValidation(config);
+
+// const showInputError = (popupInput, popupError, errorMessage, config) => {
+//     popupInput.classList.add(config.inputErrorClass);
+//     popupError.textContent = errorMessage;
+//     popupError.classList.add(config.errorClass);
+// };
+
+// const hideInputError = (popupInput, popupError, config) => {
+//     popupInput.classList.remove(config.inputErrorClass);
+//     popupError.classList.remove(config.errorClass);
+//     popupError.textContent = '';
+//     console.log(config);
+// };
+
+// // const showInputError = (elem, errorMesage) => {
+// //     elem.classList.add('popup__input_type_error');
+// //     popupError.textContent = errorMesage;
+// //     popupError.classList.add('form__input-error_active');
+// // };
+
+// // const hideInputError = (elem) => {
+// //     elem.classList.remove('popup__input_type_error');
+// //     popupError.classList.remove('form__input-error_active');
+// //     popupError.textContent = '';
+// // };
+
+// const isValid = (popupForm, popupInput, popupError, config) => {
+   
+
+//     if (popupInput.validity.patternMismatch) {
+//         popupInput.setCustomValidity(popupInput.dataset.errorMessage);
+//         console.log(popupInput.validity.patternMismatch)
+
+//     } else { 
+//         popupInput.setCustomValidity("");
+//     }
+
+//     if(!popupInput.validity.valid) {
+//         showInputError(popupInput, popupError, popupInput.validationMessage, config);
+//     } else {
+//         hideInputError(popupInput, popupError, config);
+//     }
+// };
+
+// popupInput.addEventListener('input', isValid);
